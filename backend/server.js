@@ -12,21 +12,21 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    res.send('Server is running');
+    res.send(user);
 });
 
 app.post('/', (req, res) => {
-    const { action, username, password } = req.body;
+    const { action, username, password, email, phone } = req.body;
 
     if (!username || !password) {
         return res.status(400).send('Username and password are required');
     }
-
+    
     if (action === 'register') {
     if (user.find(user => user.username === username)) {
         return res.status(400).send('Username already exists');
     }
-    user.push({ username, password });
+    user.push({ username, password, email, phone});
     res.send('Successfully Register');
     } else if (action === 'login'){
         const users = user.find(user => user.username === username);
